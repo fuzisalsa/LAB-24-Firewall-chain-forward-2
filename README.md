@@ -1,7 +1,7 @@
 # LAB-24-Firewall-chain-forward-2
 tanggal 17 Agustus 2025
 
-![m]()
+![m](HQCapture.PNG)
 
 # Langkah Konfigurasi Firewall Chain Forward pada Mikrotik
 
