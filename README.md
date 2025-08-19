@@ -12,55 +12,30 @@ Dengan ketentuan :
 **IP klien yang mengakses tetap terdokumentasi.**  
 
 ---
+1. Dokumentasi client, agar setiap client (PC/Laptop) yang akses internet otomatis masuk ke daftar client_access.
 
-1. Buat Address List untuk Klien (PC & Laptop).  
-   kita masukkan IP klien ke address list.    
+![m](d1.PNG)
 
-```bash
-/ip firewall address-list
-add address=192.168.10.2 list=KLIEN
-add address=192.168.10.3 list=KLIEN
-```
+2. Sekarang bisa kita lihat di addrest-list untuk yang mengakses internet.
+   
+![m](a2.1.PNG)
 
-2. Blokir Akses YouTube & Facebook.    
-   Gunakan layer7 protocol atau langsung domain list:    
+4. Tambahkan Address list untuk Facebook dan Youtube. Agar semua IP tujuan Facebook & YouTube masuk ke daftar diblokir.
 
-```bash
-/ip firewall layer7-protocol
-add name=block_youtube regexp="^.+(youtube.com|ytimg.com).*\$"
-add name=block_facebook regexp="^.+(facebook.com|fbcdn.net).*\$"
-```
+![m](d2.PNG)
 
-3. Buat Rule Firewall Forward.    
-   Agar hanya saat **jam kerja (misal 08:00–16:00)** akses diblokir.    
+5. Sekarang kita blokir Facebook & YouTube Saat Jam Kerja.
 
-```bash
-/ip firewall filter
-add chain=forward src-address-list=KLIEN layer7-protocol=block_youtube \
- action=drop time=8h-16h,sun,mon,tue,wed,thu,fri,sat
-add chain=forward src-address-list=KLIEN layer7-protocol=block_facebook \
- action=drop time=8h-16h,sun,mon,tue,wed,thu,fri,sat
-```
+![m](a4.PNG)
 
-4. Dokumentasi Log IP Klien yang Akses.   
+6. Izinkan Akses Internet Lain di firewall filter rules.
 
-```bash
-/ip firewall filter
-add chain=forward src-address-list=KLIEN action=log log-prefix="AKSES-KLIEN "
-```
+![m](r1.PNG)
+
 # pengujian   
 1. Klien masih bisa akses internet secara umum (Google, email, dll).  
-
-![m]()
-
 3. Akses YouTube dan Facebook terblokir saat jam kerja.  
-
-![m]()
-
-4. Log mencatat IP setiap klien yang melakukan request.  
-
-![m]()
-
+4. Log mencatat IP setiap klien yang melakukan request. 
 # Kesimpulan
 
 Dengan konfigurasi firewall chain forward, administrator dapat **mengontrol akses situs tertentu**,   
