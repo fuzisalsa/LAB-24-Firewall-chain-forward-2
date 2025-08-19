@@ -18,7 +18,7 @@ Dengan ketentuan :
 
 2. Sekarang bisa kita lihat di addrest-list untuk yang mengakses internet.
    
-![m](a2.1.PNG)
+![m](d2.1.PNG)
 
 4. Tambahkan Address list untuk Facebook dan Youtube. Agar semua IP tujuan Facebook & YouTube masuk ke daftar diblokir.
 
